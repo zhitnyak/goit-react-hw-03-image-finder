@@ -148,7 +148,7 @@
 
 // }
 
-// //+++++++++++++
+// //+++++++++++++==
 
 // export default class catInfo extends Component{
 
