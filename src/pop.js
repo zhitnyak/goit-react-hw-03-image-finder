@@ -1,84 +1,8 @@
-// // import {ToastContainer} from 'react'
+// //================
 
-// // import React, { Component } from "react";
+// import { Component } from "react";
 
-// // import axios from 'axios';
-
-// // const API_KEY = '22603097-01ea7c9e46d89c9af2e821f90';
-
-// // const BASE_URL = 'https://pixabay.com/api/';
-
-// class App extends Component {
-
-//   state = {
-
-//     catName: 'null' ,
-
-//     // loadiing: false,
-
-//     // page: 1,
-
-//     // perPage: 12,
-
-//   };
-
-// // handleNameChange = e =>{
-
-// //   this.setState({cat: e.currentTarget.value.toLowerCase()})
-
-// // }
-
-//   habdleFormSubmit = catName =>{
-
-//     this.setState({catName})
-
-//   }
-
-//   // componentDidMount() {
-
-//   //   //const url = `${BASE_URL}?q=${this.query}&key=${API_KEY}&image_type=photo&orientation=horizontal&page=${this.page}&per_page=${this.perPage}`;
-
-//   //   fetch(`https://pixabay.com/api/?q=cat&page=1&${API_KEY}=your_key&image_type=photo&orientation=horizontal&per_page=12`)
-
-//   //   .then(res=>res.json())
-
-//   //   .then(cat => this.setState({cat}))
-
-//   //   .finally(()=> this.setState({loading: false}))
-
-//   // }
-
-//   render() {
-
-//    return (
-
-//       <div className="wrapper">
-
-//         {/* {this.state.loading && <h1>Загружаем...</h1>}
-
-//         {this.state.cat && <div>{this.state.cat}</div>} */}
-
-//         <catForm onSubmit={this.habdleFormSubmit}/>
-
-//         <catInfo catName={this.state.catName}/>
-
-//         <ToastContainer autoClose={3000}/>
-
-//       </div>
-
-//     );
-
-//   }
-
-// }
-
-// export default App;
-
-// //==============
-
-// // import { Component } from "react";
-
-// // import {toast} from 'react-toastify'
+// import {toast} from 'react-toastify'
 
 // export default class catForm extends Component{
 
@@ -114,49 +38,53 @@
 
 //   return {
 
-// //   <header class="searchbar">
+//   <header class="searchbar">
 
-// //   <form class="form">
+//   <form class="form">
 
-// //     <button type="submit" class="button">
+//     <button type="submit" class="button">
 
-// //       <span class="button-label">Search</span>
+//       <span class="button-label">Search</span>
 
-// //     </button>
+//     </button>
 
-// //     <input
+//     <input
 
-// //       class="input"
+//       class="input"
 
-// //       type="text"
+//       type="text"
 
-// //       autocomplete="off"
+//       autocomplete="off"
 
-// //       autofocus
+//       autofocus
 
-// //       placeholder="Search images and photos"
+//       placeholder="Search images and photos"
 
-// //     />
+//     />
 
-// //   </form>
+//   </form>
 
-// // </header>
-
-// }
+// </header>
 
 // }
 
 // }
 
-// //+++++++++++++==
+// }
+
+// //+++++++++++++
+
+// import api from './'
 
 // export default class catInfo extends Component{
 
 //   state = {
 
-//     cat: "" ,
+//     cat: null ,
 
-//      loadiing: false,
+//     error: null,
+
+//     status: 'idle'
 
 //   };
 
@@ -174,57 +102,87 @@
 
 //     console.log('this.props.catName', nextName)
 
-//     this.setState({loading: true, cat: null})
+//     this.setState({status:'pending'});
 
-//     fetch(`https://pixabay.com/api/?q=${searchName}&page=${pages}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+//       api.fetchImg(nextSearch, page)
 
-//     .tthen((response) => {
+//       .then(cat => this.setState({cat, status: 'resolved'}))
 
-//       if (response.ok) {
-
-//         return response.json();
-
-//       }
-
-//       return Promise.reject(new Error(`No images on request ${nextName}`));
-
-//     })
-
-//       .then(cat => this.setState({cat}))
-
-//       .catch(error => this.setState({error}))
-
-//       .finally(()=> this.setState({loading: false}))
+//       .catch(error => this.setState({status: 'rejected'}))
 
 //   }
 
 // }
 
-//   render(){
+// render(){
 
-//     const{cat, loading, error} = this.state
+//   const{cat, error, status} = this.state
 
-//     const {catName} = this.props
+//   if(status === 'idle'){
 
-//     return <div>
+//   return <div></div>
 
-//       <h1>catInfo</h1>
+//   }
 
-//       {error && <h1>{error.message}</h1>}
+//      if(status === 'pending'){
 
-//               {loading && <h1>Загружаем...</h1>}
+//     return <Spiner />
 
-//       {!catName && <div>Vvedy</div>}
+//     }
 
-//       {cat && <div>{cat.name}</div>}
+//     if(status === 'rejected'){
 
-//         {/* {this.state.cat && <div>{this.state.cat}</div>} */}
+//       return <h1>{error.message}</h1>
 
-//       <p>{catName}</p>
+//       }
 
-//       <img src={webformatURL} alt={tags} className={css.ImageGalleryItemImage}/>
+//      if(status === 'resolved'){
 
-//       </div>
+//       return (
+
+// <div>
+
+//     <p>{catName}</p>
+
+//     <img src={webformatURL} alt={tags} className={css.ImageGalleryItemImage}/>
+
+// </div>
+
+//       )
+
+//       }
+
+//     }}
+
+//       //===================================== Fetch
+
+// //============================
+
+// import React, { Component } from "react";
+
+// import Loader from "react-loader-spinner";
+
+// export default class Loader extends Component {
+
+//   render() {
+
+//     return (
+
+//       <Loader
+
+//         type="Puff"
+
+//         color="#00BFFF"
+
+//         height={100}
+
+//         width={100}
+
+//         timeout={3000} //3 secs
+
+//       />
+
+//     );
 
 //   }
 
