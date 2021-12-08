@@ -1,6 +1,7 @@
 import "./App.css";
 import { Component } from "react";
-// import axios from "axios";
+// import Searchbar from "./components/Searchbar/Searchbar";
+// import ImageGallery from "./components/ImageGallery/ImageGallery";
 
 class App extends Component {
   state = {
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <>
         {/* <Searchbar onSubmit={this.habdleFormSubmit} />
-        <ImageGallery query={searchQuery} />{" "} */}
+        <ImageGallery query={searchQuery} /> */}
       </>
     );
   }
