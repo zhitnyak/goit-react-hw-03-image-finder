@@ -1,4 +1,5 @@
 import css from "../../App.module.css";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
 import Button from "../Button/Button";
@@ -23,9 +24,12 @@ class ImageGallery extends Component {
         .fetchImg(nextSearch, page)
         .then((images) => {
           console.log(images);
+
           if (images.total === 0) {
             this.setState({ error: "No any picture", status: "rejected" });
           } else {
+            console.log(images);
+
             this.setState({
               images: images.hits,
               status: "resolved",
@@ -38,10 +42,11 @@ class ImageGallery extends Component {
     }
   }
   loadMore = () => {
+    const search = this.state.searchQuery;
     const page = this.state.page + 1;
 
     api
-      .fetchImg(this.state.searchQuery, page)
+      .fetchImg(search, page)
       .then((images) =>
         this.setState((prevState) => ({
           images: [...prevState.images, ...images.hits],
@@ -105,3 +110,7 @@ class ImageGallery extends Component {
   }
 }
 export default ImageGallery;
+ImageGallery.propTypes = {
+  query: PropTypes.string.isRequired,
+  changeStatus: PropTypes.func.isRequired,
+};
