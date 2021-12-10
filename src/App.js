@@ -1,16 +1,15 @@
-import "./App.css";
-import { Component } from "react";
-// import Api from "./components/apiImg";
+import React, { Component } from "react";
 import Searchbar from "./components/Searchbar/Searchbar";
-// import ImageGallery from "./components/ImageGallery/ImageGallery";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import "./App.css";
 
 class App extends Component {
   state = {
     searchQuery: "null",
   };
 
-  habdleFormSubmit = (data) => {
-    this.setState({ data });
+  habdleFormSubmit = (searchQuery) => {
+    this.setState({ searchQuery });
   };
 
   render() {
@@ -19,7 +18,7 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.habdleFormSubmit} />
-        {/* <ImageGallery query={searchQuery} /> */}
+        <ImageGallery searchQuery={searchQuery} />
       </>
     );
   }
