@@ -5,6 +5,7 @@ function fetchImg(searchQuery, pages) {
   return fetch(
     `${BASE_URL}?q=${searchQuery}&page=${pages}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
   ).then((response) => {
+    console.log(response);
     if (response.ok) {
       return response.json();
     }
@@ -13,6 +14,6 @@ function fetchImg(searchQuery, pages) {
   });
 }
 
-const api = { fetchImg };
+const Api = { fetchImg };
 
-export default api;
+export default Api;

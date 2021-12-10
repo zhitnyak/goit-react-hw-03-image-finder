@@ -1,5 +1,6 @@
 import "./App.css";
 import { Component } from "react";
+// import Api from "./components/apiImg";
 // import Searchbar from "./components/Searchbar/Searchbar";
 // import ImageGallery from "./components/ImageGallery/ImageGallery";
 
