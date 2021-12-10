@@ -1,4 +1,4 @@
-import css from "../../App.css";
+import css from "../../App.module.css";
 import React, { Component } from "react";
 import ImageGalleryItem from "../ImageGalleryItem/ImageGalleryItem";
 import Button from "../Button/Button";
@@ -13,8 +13,8 @@ class ImageGallery extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    const prevSearch = prevProps.searchbar;
-    const nextSearch = this.props.searchbar;
+    const prevSearch = prevProps.searchQuery;
+    const nextSearch = this.props.searchQuery;
     const page = 1;
     if (prevSearch !== nextSearch) {
       this.setState({ status: "pending", page: 1 });
@@ -30,7 +30,7 @@ class ImageGallery extends Component {
               images: images.hits,
               status: "resolved",
               page: 1,
-              searchbar: nextSearch,
+              searchQuery: nextSearch,
             });
           }
         })
@@ -41,7 +41,7 @@ class ImageGallery extends Component {
     const page = this.state.page + 1;
 
     api
-      .fetchImg(this.state.searchbar, page)
+      .fetchImg(this.state.searchQuery, page)
       .then((images) =>
         this.setState((prevState) => ({
           images: [...prevState.images, ...images.hits],
@@ -72,7 +72,7 @@ class ImageGallery extends Component {
       return <p></p>;
     }
     if (status === "pending") {
-      return <Loader />;
+      return <Loader type="Oval" color="#DCB60E" height={60} width={60} />;
     }
     if (status === "resolved") {
       return (

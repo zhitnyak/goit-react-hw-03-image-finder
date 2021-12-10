@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import css from "../../App.css";
+import css from "../../App.module.css";
 
 const ImageGalleryItem = ({ webformatURL, largeImageURL, tags, modalOpen }) => {
   return (

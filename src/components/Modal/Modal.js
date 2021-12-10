@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import css from "../../App.css";
+import css from "../../App.module.css";
 
 class Modal extends Component {
   static propTypes = {

@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-// import Loader from "react-loader-spinner";
 
 class Loader extends Component {
   render() {
-    return <Loader type="Bars" color="#00BFFF" height={80} width={80} />;
+    return (
+      <Loader
+        type="Puff"
+        color="#09103E"
+        height={100}
+        width={100}
+        timeout={3000}
+      />
+    );
   }
 }
 export default Loader;
