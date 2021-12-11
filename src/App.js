@@ -8,10 +8,12 @@ class App extends Component {
     searchQuery: "null",
   };
 
-  habdleFormSubmit = (searchQuery) => {
-    this.setState({ searchQuery });
+  habdleFormSubmit = (searchName) => {
+    if (searchName) {
+      this.setState({ searchQuery: searchName });
+    }
+    return;
   };
-
   render() {
     const { searchQuery } = this.state;
 

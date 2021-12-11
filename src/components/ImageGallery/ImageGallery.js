@@ -9,6 +9,9 @@ import Modal from "../Modal/Modal";
 
 import api from "../apiImg";
 class ImageGallery extends Component {
+  static propTypes = {
+    images: PropTypes.arrayOf(PropTypes.object),
+  };
   state = {
     status: "idle",
   };
@@ -28,7 +31,7 @@ class ImageGallery extends Component {
           if (images.total === 0) {
             this.setState({ error: "No any picture", status: "rejected" });
           } else {
-            console.log(images);
+            console.log(images.hits);
 
             this.setState({
               images: images.hits,
@@ -77,7 +80,15 @@ class ImageGallery extends Component {
       return <p></p>;
     }
     if (status === "pending") {
-      return <Loader type="Oval" color="#DCB60E" height={60} width={60} />;
+      return (
+        <Loader
+          type="Oval"
+          color="#DCB60E"
+          height={60}
+          width={60}
+          style={{ textAlign: "center", paddingTop: "20px" }}
+        />
+      );
     }
     if (status === "resolved") {
       return (
@@ -105,12 +116,13 @@ class ImageGallery extends Component {
       );
     }
     if (status === "rejected") {
-      return <p>{this.state.error}</p>;
+      return (
+        <p className={css.p}>Sorry, "{this.props.searchQuery}" not found</p>
+      );
     }
   }
 }
 export default ImageGallery;
 ImageGallery.propTypes = {
-  query: PropTypes.string.isRequired,
-  changeStatus: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };
