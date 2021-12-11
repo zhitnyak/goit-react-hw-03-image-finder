@@ -7,7 +7,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Modal from "../Modal/Modal";
 
-import api from "../apiImg";
+import { fetchImg } from "../apiImg";
 class ImageGallery extends Component {
   static propTypes = {
     images: PropTypes.arrayOf(PropTypes.object),
@@ -23,8 +23,7 @@ class ImageGallery extends Component {
     if (prevSearch !== nextSearch) {
       this.setState({ status: "pending", page: 1 });
 
-      api
-        .fetchImg(nextSearch, page)
+      fetchImg(nextSearch, page)
         .then((images) => {
           console.log(images);
 
@@ -48,8 +47,7 @@ class ImageGallery extends Component {
     const search = this.state.searchQuery;
     const page = this.state.page + 1;
 
-    api
-      .fetchImg(search, page)
+    fetchImg(search, page)
       .then((images) =>
         this.setState((prevState) => ({
           images: [...prevState.images, ...images.hits],

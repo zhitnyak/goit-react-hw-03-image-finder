@@ -5,15 +5,12 @@ function fetchImg(searchQuery, pages) {
   return fetch(
     `${BASE_URL}?q=${searchQuery}&page=${pages}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
   ).then((response) => {
-    console.log(response);
     if (response.ok) {
       return response.json();
     }
 
-    return Promise.reject(new Error(`No images on request &{searchQuery}`));
+    return Promise.reject(new Error(`No images on request`));
   });
 }
 
-const api = { fetchImg };
-
-export default api;
+export { fetchImg };
