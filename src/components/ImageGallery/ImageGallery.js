@@ -7,7 +7,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 import Modal from "../Modal/Modal";
 
-import { fetchImg } from "../apiImg";
+import { fetchImg } from "../../servise/apiImg";
 class ImageGallery extends Component {
   state = {
     status: "idle",
