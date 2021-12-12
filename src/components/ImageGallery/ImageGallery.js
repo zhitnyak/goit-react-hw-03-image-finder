@@ -9,9 +9,6 @@ import Modal from "../Modal/Modal";
 
 import { fetchImg } from "../apiImg";
 class ImageGallery extends Component {
-  static propTypes = {
-    images: PropTypes.arrayOf(PropTypes.object),
-  };
   state = {
     status: "idle",
   };
